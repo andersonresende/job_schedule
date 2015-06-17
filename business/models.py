@@ -37,6 +37,7 @@ class CategoryService(models.Model):
 
 
 class Service(Event):
+    reference = models.CharField(max_length=750, null=True, blank=True)
     category_service = models.ForeignKey(CategoryService, related_name='services')
     employees = models.ManyToManyField(Employee, related_name='services')
 

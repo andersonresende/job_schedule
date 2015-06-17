@@ -18,6 +18,8 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=750, null=True, blank=True)),
             ],
             options={
+                'verbose_name': 'Category Employee',
+                'verbose_name_plural': 'Category Employees ',
             },
             bases=(models.Model,),
         ),
@@ -28,6 +30,8 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=750, null=True, blank=True)),
             ],
             options={
+                'verbose_name': 'Category Service',
+                'verbose_name_plural': 'Category Services ',
             },
             bases=(models.Model,),
         ),
@@ -39,6 +43,8 @@ class Migration(migrations.Migration):
                 ('category_employee', models.ForeignKey(related_name=b'employees', to='business.CategoryEmployee')),
             ],
             options={
+                'verbose_name': 'Employee',
+                'verbose_name_plural': 'Employees ',
             },
             bases=(models.Model,),
         ),
@@ -46,10 +52,13 @@ class Migration(migrations.Migration):
             name='Service',
             fields=[
                 ('event_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='schedule.Event')),
+                ('reference', models.CharField(max_length=750, null=True, blank=True)),
                 ('category_service', models.ForeignKey(related_name=b'services', to='business.CategoryService')),
                 ('employees', models.ManyToManyField(related_name=b'services', to='business.Employee')),
             ],
             options={
+                'verbose_name': 'Service',
+                'verbose_name_plural': 'Services',
             },
             bases=('schedule.event',),
         ),
