@@ -1,8 +1,13 @@
 from django.contrib import admin
-from .models import CategoryEmployee, Employee, CategoryService, Service
+from .models import Service, Employee, CategoryEmployee, CategoryService
 
 
-admin.site.register(CategoryEmployee)
-admin.site.register(Employee)
-admin.site.register(CategoryService)
-admin.site.register(Service)
+admin.site.register(
+    [
+        Service,
+        Employee,
+        CategoryEmployee,
+        CategoryService
+    ]
+)
+
