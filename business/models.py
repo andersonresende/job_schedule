@@ -4,6 +4,7 @@ from schedule.models.events import Event
 
 class CategoryEmployee(models.Model):
     name = models.CharField(max_length=750, null=True, blank=True)
+    medal = models.ImageField(upload_to='business', null=True, blank=True)
 
     def __unicode__(self):
         return self.name
