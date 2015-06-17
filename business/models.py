@@ -1,4 +1,5 @@
 from django.db import models
+from colorful.fields import RGBColorField
 from schedule.models.events import Event
 
 
@@ -28,6 +29,7 @@ class Employee(models.Model):
 
 class CategoryService(models.Model):
     name = models.CharField(max_length=750, null=True, blank=True)
+    color = RGBColorField()
 
     def __unicode__(self):
         return self.name

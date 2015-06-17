@@ -3,6 +3,7 @@ Pillow==2.8.2
 argparse==1.1
 django-admin-bootstrapped==2.5.1
 django-annoying==0.8.2
+django-colorful==1.1.0
 django-scheduler==0.7.5
 flake8==2.4.1
 future==0.14.3
