@@ -21,20 +21,33 @@ class Migration(migrations.Migration):
             ],
             options={
                 'verbose_name': 'Category Employee',
-                'verbose_name_plural': 'Category Employees ',
+                'verbose_name_plural': 'Category Employees',
             },
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='CategoryService',
+            name='CustomCategoryService',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=750, null=True, blank=True)),
                 ('color', colorful.fields.RGBColorField()),
             ],
             options={
-                'verbose_name': 'Category Service',
-                'verbose_name_plural': 'Category Services ',
+                'verbose_name': 'Custom Category Service',
+                'verbose_name_plural': 'Custom Category Services',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='DefaultCategoryService',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=750, null=True, blank=True)),
+                ('color', colorful.fields.RGBColorField()),
+            ],
+            options={
+                'verbose_name': 'Default Category Service',
+                'verbose_name_plural': 'Default Category Services',
             },
             bases=(models.Model,),
         ),
@@ -47,7 +60,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'verbose_name': 'Employee',
-                'verbose_name_plural': 'Employees ',
+                'verbose_name_plural': 'Employees',
             },
             bases=(models.Model,),
         ),
@@ -56,7 +69,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('event_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='schedule.Event')),
                 ('reference', models.CharField(max_length=750, null=True, blank=True)),
-                ('category_service', models.ForeignKey(related_name=b'services', to='business.CategoryService')),
+                ('custom_category_service', models.OneToOneField(related_name=b'service', to='business.CustomCategoryService')),
+                ('default_category_service', models.ForeignKey(related_name=b'services', to='business.DefaultCategoryService')),
                 ('employees', models.ManyToManyField(related_name=b'services', to='business.Employee')),
             ],
             options={

@@ -12,7 +12,7 @@ class CategoryEmployee(models.Model):
 
     class Meta:
         verbose_name = 'Category Employee'
-        verbose_name_plural = 'Category Employees '
+        verbose_name_plural = 'Category Employees'
 
 
 class Employee(models.Model):
@@ -24,7 +24,7 @@ class Employee(models.Model):
 
     class Meta:
         verbose_name = 'Employee'
-        verbose_name_plural = 'Employees '
+        verbose_name_plural = 'Employees'
 
 
 class CategoryService(models.Model):
@@ -36,12 +36,28 @@ class CategoryService(models.Model):
 
     class Meta:
         verbose_name = 'Category Service'
-        verbose_name_plural = 'Category Services '
+        verbose_name_plural = 'Category Services'
+        abstract = True
+
+
+class DefaultCategoryService(CategoryService):
+
+    class Meta:
+        verbose_name = 'Default Category Service'
+        verbose_name_plural = 'Default Category Services'
+
+
+class CustomCategoryService(CategoryService):
+
+    class Meta:
+        verbose_name = 'Custom Category Service'
+        verbose_name_plural = 'Custom Category Services'
 
 
 class Service(Event):
     reference = models.CharField(max_length=750, null=True, blank=True)
-    category_service = models.ForeignKey(CategoryService, related_name='services')
+    default_category_service = models.ForeignKey(DefaultCategoryService, related_name='services')
+    custom_category_service = models.OneToOneField(CustomCategoryService, related_name='service')
     employees = models.ManyToManyField(Employee, related_name='services')
 
     def __unicode__(self):
