@@ -4,7 +4,9 @@ from .models import (
     Employee,
     CategoryEmployee,
     DefaultCategoryService,
-    CustomCategoryService
+    CustomCategoryService,
+    Holiday,
+
 )
 
 
@@ -19,6 +21,7 @@ admin.site.register(
         CategoryEmployee,
         DefaultCategoryService,
         CustomCategoryService,
+        Holiday,
     ]
 )
 

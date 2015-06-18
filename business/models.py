@@ -41,24 +41,31 @@ class CategoryService(models.Model):
 
 
 class DefaultCategoryService(CategoryService):
-
     class Meta:
         verbose_name = 'Default Category Service'
         verbose_name_plural = 'Default Category Services'
 
 
 class CustomCategoryService(CategoryService):
-
     class Meta:
         verbose_name = 'Custom Category Service'
         verbose_name_plural = 'Custom Category Services'
 
 
 class Service(Event):
+    NORMAL = 'NO'
+    HIGH = 'HI'
+    CRITICAL = 'CT'
+    URGENCY_STATUS_CHOICES = (
+        (NORMAL, 'Normal'),
+        (HIGH, 'High'),
+        (CRITICAL, 'Critical'),
+    )
     reference = models.CharField(max_length=750, null=True, blank=True)
     default_category_service = models.ForeignKey(DefaultCategoryService, related_name='services')
     custom_category_service = models.OneToOneField(CustomCategoryService, related_name='service')
     employees = models.ManyToManyField(Employee, related_name='services')
+    urgency_status = models.CharField(max_length=2, choices=URGENCY_STATUS_CHOICES, default=NORMAL)
 
     def __unicode__(self):
         return self.title
@@ -66,3 +73,16 @@ class Service(Event):
     class Meta:
         verbose_name = 'Service'
         verbose_name_plural = 'Services'
+
+
+class Holiday(models.Model):
+    date = models.DateField()
+    work_day = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return str(self.date)
+
+    class Meta:
+        verbose_name = 'Holiday'
+        verbose_name_plural = 'Holidays'
+

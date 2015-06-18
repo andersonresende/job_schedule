@@ -65,10 +65,24 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
+            name='Holiday',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('date', models.DateField()),
+                ('work_day', models.BooleanField(default=False)),
+            ],
+            options={
+                'verbose_name': 'Holiday',
+                'verbose_name_plural': 'Holidays',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
             name='Service',
             fields=[
                 ('event_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='schedule.Event')),
                 ('reference', models.CharField(max_length=750, null=True, blank=True)),
+                ('urgency_status', models.CharField(default=b'NO', max_length=2, choices=[(b'NO', b'Normal'), (b'HI', b'High'), (b'CT', b'Critical')])),
                 ('custom_category_service', models.OneToOneField(related_name=b'service', to='business.CustomCategoryService')),
                 ('default_category_service', models.ForeignKey(related_name=b'services', to='business.DefaultCategoryService')),
                 ('employees', models.ManyToManyField(related_name=b'services', to='business.Employee')),
