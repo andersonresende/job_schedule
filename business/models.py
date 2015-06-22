@@ -34,6 +34,9 @@ class CategoryService(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_color(self):
+        return self.color
+
     class Meta:
         verbose_name = 'Category Service'
         verbose_name_plural = 'Category Services'
@@ -62,13 +65,42 @@ class Service(Event):
         (CRITICAL, 'Critical'),
     )
     reference = models.CharField(max_length=750, null=True, blank=True)
-    default_category_service = models.ForeignKey(DefaultCategoryService, related_name='services')
-    custom_category_service = models.OneToOneField(CustomCategoryService, related_name='service')
+    default_category_service = models.ForeignKey(
+        DefaultCategoryService,
+        related_name='services',
+        null=True,
+        blank=True
+    )
+    custom_category_service = models.OneToOneField(
+        CustomCategoryService,
+        related_name='service',
+        null=True,
+        blank=True
+    )
     employees = models.ManyToManyField(Employee, related_name='services')
     urgency_status = models.CharField(max_length=2, choices=URGENCY_STATUS_CHOICES, default=NORMAL)
 
     def __unicode__(self):
         return self.title
+
+    def get_category_service(self):
+        """
+        That functions returns the category_service seted.
+
+        :return: obj subclass of CategoryService
+        """
+
+        return self.default_category_service or self.custom_category_service
+
+    def get_color(self):
+        """
+        That function check what service exists and return your rgb color.
+
+        :return: String
+        """
+
+        category_service = self.get_category_service()
+        return category_service.get_color()
 
     class Meta:
         verbose_name = 'Service'
@@ -76,6 +108,7 @@ class Service(Event):
 
 
 class Holiday(models.Model):
+    name = models.CharField(max_length=750, null=True, blank=True)
     date = models.DateField()
     work_day = models.BooleanField(default=False)
 

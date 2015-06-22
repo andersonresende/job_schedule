@@ -3,8 +3,10 @@
 {% ifnotequal day.start.month month.start.month %}
   <td class="{{size}} daynumber noday"></td>
 {% else %}
-  {% if day.has_occurrences %}
-    <td class="{{size}} daynumber busy">
+  {% if day|check_is_sunday %}
+    <td class="{{size}} daynumber sunday">
+  {% elif day|check_is_holiday %}
+    <td class="{{size}} daynumber holiday">
   {% else %}
     <td class="{{size}} daynumber free">
 {% endif %}
@@ -18,19 +20,23 @@
             {% if day.has_occurrences %}
                 {% for o in day.get_occurrence_partials|filter_occurrences_by_urgency:day %}
                         <div class="eventcell eventcell{{o.class}}{% if o.occurrence.cancelled %} cancelled{% endif %}" 
-                            href="#{% hash_occurrence o.occurrence %}" onclick="openDetail(this);">
+                            href="#{% hash_occurrence o.occurrence %}" onclick="openDetail(this);"
+                             style="background:{{ o|get_color_service }};">
                             <div class="starttime">
-                                {% ifequal o.class 0 %}{{ o.occurrence.start|time:"G:i" }}{% endifequal %}
-                                {% ifequal o.class 1 %}{{ o.occurrence.start|time:"G:i" }}{% endifequal %}
-                                {% ifequal o.class 2 %}(All day){% endifequal %}
-                                {% ifequal o.class 3 %}Ends at {{ o.occurrence.end|time:"G:i" }}{% endifequal %}
+                                {% comment %}
+                                    {% ifequal o.class 0 %}{{ o.occurrence.start|time:"G:i" }}{% endifequal %}
+                                    {% ifequal o.class 1 %}{{ o.occurrence.start|time:"G:i" }}{% endifequal %}
+                                    {% ifequal o.class 2 %}(All day){% endifequal %}
+                                    {% ifequal o.class 3 %}Ends at {{ o.occurrence.end|time:"G:i" }}{% endifequal %}
+                                {% endcomment %}
                             </div>
                             <div class="eventdesc">
                                 {% title o.occurrence %}
+                                <span> {{o|get_reference}}</span>
                             </div>
                         </div>
                         <div id="{% hash_occurrence o.occurrence %}" style="display:none;">
-                          {% include 'schedule/_detail.html' with occurrence=o.occurrence %}
+                          {% include 'schedule/_detail.html' with o=o %}
                         </div>
                 {% endfor %}
             {% endif %}

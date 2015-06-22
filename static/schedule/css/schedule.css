@@ -137,6 +137,14 @@ table.calendar td.busy {
 	background-color: #ffcece
 }
 
+table.calendar td.sunday {
+	background-color: #336699
+}
+
+table.calendar td.holiday {
+	background-color: #66ff33
+}
+
 table.calendar td.small {
 	width: 28px;
 	height: 20px;
@@ -162,11 +170,13 @@ td.small div.header a {
 
 td.daynumber div.eventcell {
     background:#f0f0f0;
-    border:1px dotted grey;
+    border:1px solid with;
+    border-radius: 5px;
     clear:both;
     cursor:pointer;
     margin:0 1px 3px 1px;
     overflow:auto;
+    color: white;
 }
 
 td.daynumber div.starttime {
