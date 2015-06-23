@@ -1,6 +1,9 @@
 run:
 	python manage.py runserver
 
+ubuntu:
+	ssh -i ~/Downloads/tangerinalab.pem ubuntu@ec2-54-232-20-254.sa-east-1.compute.amazonaws.com
+
 migrate:
 	python manage.py makemigrations business
 	python manage.py migrate business
