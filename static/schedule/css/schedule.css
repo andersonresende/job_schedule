@@ -101,7 +101,8 @@ div.occ span.actions span.edit {padding-right:3px;}
 table.calendar {
 	border-collapse: separate;
 	border-spacing: 2px;
-  border:2px solid #f0f0f0;
+    border:1px solid #f0f0f0;
+    background: #f0f0f0;
 }
 
 .dateheader {
@@ -115,14 +116,15 @@ table.calendar {
 }
 
 table.calendar td {
-  text-align:left;
+  text-align:center;
 	margin: 2px;
 	padding: 1px;
+	background: white;
 }
 
 table.calendar td.daynumber {
 	font-size: 8pt;
-	vertical-align: top
+	vertical-align: top;
 }
 
 table.calendar td.noday {
@@ -130,7 +132,7 @@ table.calendar td.noday {
 }
 
 table.calendar td.free {
-	background-color: #c5dbff
+	background-color: white;
 }
 
 table.calendar td.busy {
@@ -138,7 +140,7 @@ table.calendar td.busy {
 }
 
 table.calendar td.sunday {
-	background-color: #336699
+	background-color: #f5f5f5;
 }
 
 table.calendar td.holiday {
@@ -151,7 +153,9 @@ table.calendar td.small {
 	text-align: center
 }
 
-td.daynumber { height:100px;}
+td.daynumber {
+    height:50px;
+}
 
 td.daynumber div.header {
   margin-bottom:2px;
@@ -170,17 +174,17 @@ td.small div.header a {
 
 td.daynumber div.eventcell {
     background:#f0f0f0;
-    border:1px solid with;
+    border:1px solid black !important;
     border-radius: 5px;
     clear:both;
     cursor:pointer;
     margin:0 1px 3px 1px;
     overflow:auto;
-    color: white;
+    color: black;
     font-size:14px;
     padding-top:5px;
     padding-left:5px;
-    height:25px;
+    height:20px;
 }
 
 td.daynumber div.starttime {
