@@ -3,6 +3,20 @@ from business.models import Service, Holiday
 
 register = template.Library()
 
+@register.filter
+def get_tooltip_info(dic):
+    """
+    That function returns de custom information about
+    service to tooltip template.
+
+    :param dic: Dict
+    :return: String
+    """
+
+    service = get_service(dic)
+    tooltip_info = service.get_tooltip_info()
+    return tooltip_info
+
 def get_service(dic):
     """
     That functions get a occurrence and returns a service

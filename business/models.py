@@ -102,6 +102,20 @@ class Service(Event):
         category_service = self.get_category_service()
         return category_service.get_color()
 
+    def get_tooltip_info(self):
+        """
+        That function returns tooltip info text form service attributes.
+
+        :return: String
+        """
+
+        txt = "Service: {0} | Start: {1} - End: {2}"
+        start_date = str(self.start.date())
+        end_date = str(self.end.date())
+        fmt_txt = txt.format(self.title, start_date, end_date)
+
+        return fmt_txt
+
     class Meta:
         verbose_name = 'Service'
         verbose_name_plural = 'Services'
