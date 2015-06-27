@@ -14,6 +14,8 @@ from .models import (
 class ServiceForm(forms.ModelForm):
     model = Service
 
+    reference = forms.CharField(max_length=10)
+
     def clean(self):
         cleaned_data = super(ServiceForm, self).clean()
         default_category_service = cleaned_data.get("default_category_service")
@@ -32,6 +34,11 @@ class ServiceAdmin(admin.ModelAdmin):
         'rule',
         'end_recurring_period',
         'calendar'
+    ]
+    list_display = [
+        'title',
+        'reference',
+        'urgency_status'
     ]
 
 
