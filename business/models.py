@@ -22,6 +22,15 @@ class Employee(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_medal(self):
+        """
+        That function returns a medal from category employee.
+
+        :return: ImageField
+        """
+
+        return self.category_employee.medal
+
     class Meta:
         verbose_name = 'Employee'
         verbose_name_plural = 'Employees'
@@ -104,17 +113,20 @@ class Service(Event):
 
     def get_tooltip_info(self):
         """
-        That function returns tooltip info text form service attributes.
+        That function returns tooltip info to be used on render template.
 
-        :return: String
+        :return: Dict
         """
 
-        txt = "Service: {0} | Start: {1} - End: {2}"
-        start_date = str(self.start.date())
-        end_date = str(self.end.date())
-        fmt_txt = txt.format(self.title, start_date, end_date)
+        dic = {
+            'title': self.title,
+            'category_service': self.get_category_service(),
+            'start_date': str(self.start.date()),
+            'end_date': str(self.end.date()),
+            'employees': self.employees.all(),
+        }
 
-        return fmt_txt
+        return dic
 
     class Meta:
         verbose_name = 'Service'

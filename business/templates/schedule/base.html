@@ -10,7 +10,12 @@
 <script type="text/javascript" src="{% static "schedule/js/jquery-ui.js" %}"></script>
 <script type="text/javascript">
   $(function() {
-    $(document).tooltip();
+    $(document).tooltip({
+      content: function() {
+        var element = $( this );
+          return element.attr( "title" );
+      }
+    });
   });
 </script>
 

@@ -3,19 +3,20 @@ from business.models import Service, Holiday
 
 register = template.Library()
 
-@register.filter
-def get_tooltip_info(dic):
+@register.inclusion_tag("schedule/tooltip_info.html", takes_context=True)
+def render_tooltip_info(context, dic):
     """
-    That function returns de custom information about
-    service to tooltip template.
+    That function returns de custom tooltip html
+    to service.
 
     :param dic: Dict
-    :return: String
+    :return: Context
     """
-
     service = get_service(dic)
-    tooltip_info = service.get_tooltip_info()
-    return tooltip_info
+    info_dic = service.get_tooltip_info()
+    context.update(info_dic)
+
+    return context
 
 def get_service(dic):
     """

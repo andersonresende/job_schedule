@@ -1,0 +1,8 @@
+<div>
+    <p>{{title}} - {{category_service}}</p>
+    <p>{{start_date}} - {{end_date}}</p>
+
+    {% for employee in employees %}
+        <p>{{employee}}  <img src='{{MEDIA_URL}}{{employee.get_medal}}'/></p>
+    {% endfor %}
+</div>

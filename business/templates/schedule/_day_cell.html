@@ -21,7 +21,8 @@
                 {% for o in day.get_occurrence_partials|filter_occurrences_by_urgency:day %}
                         <div class="eventcell eventcell{{o.class}}{% if o.occurrence.cancelled %} cancelled{% endif %}"
                             href="#{% hash_occurrence o.occurrence %}" onclick="openDetail(this);"
-                             style="background:{{ o|get_color_service }};" title="{{o|get_tooltip_info}}" id="tooltip">
+                             style="background:{{ o|get_color_service }};"
+                             title="{% render_tooltip_info o %}" id="tooltip">
                              {% comment %}
                                 <div class="starttime">
 
@@ -32,7 +33,6 @@
 
                                 </div>
                             {% endcomment %}
-
                             <span>{{ o|get_reference }}</span>
                         </div>
                         <div id="{% hash_occurrence o.occurrence %}" style="display:none;">

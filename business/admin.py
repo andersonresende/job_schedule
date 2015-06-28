@@ -1,5 +1,8 @@
 from django.contrib import admin
+from django.contrib.admin import AdminSite
 from django import forms
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
 
 from .models import (
     Service,
@@ -13,7 +16,6 @@ from .models import (
 
 class ServiceForm(forms.ModelForm):
     model = Service
-
     reference = forms.CharField(max_length=10)
 
     def clean(self):
@@ -42,8 +44,16 @@ class ServiceAdmin(admin.ModelAdmin):
     ]
 
 
-admin.site.register(Service, ServiceAdmin)
-admin.site.register(
+class BasicAdminSite(AdminSite):
+    site_header = 'Job Schedule'
+    index_template = 'index.html'
+    app_index_template = 'app_index.html'
+
+
+admin_site = BasicAdminSite(name='basic_admin_site')
+admin_site.register(User, UserAdmin)
+admin_site.register(Service, ServiceAdmin)
+admin_site.register(
     [
         Employee,
         CategoryEmployee,
