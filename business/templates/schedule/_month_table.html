@@ -2,7 +2,7 @@
 <table align="center" class="calendar">
 {% if day_names %}
 <tr class="daysofweek">
-<td>&nbsp;</td>
+<td width="30px">&nbsp;</td>
 	{% for day_name in day_names %}<td{% ifnotequal size "small" %} width='175'{% endifnotequal %}>{{ day_name }}</td>
 {% endfor %}
 {% endif %}
