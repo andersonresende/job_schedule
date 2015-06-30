@@ -53,6 +53,8 @@ class CategoryService(models.Model):
 
 
 class DefaultCategoryService(CategoryService):
+    score_feet = models.IntegerField(null=True, blank=True)
+
     class Meta:
         verbose_name = 'Default Category Service'
         verbose_name_plural = 'Default Category Services'
@@ -88,6 +90,7 @@ class Service(Event):
     )
     employees = models.ManyToManyField(Employee, related_name='services')
     urgency_status = models.CharField(max_length=2, choices=URGENCY_STATUS_CHOICES, default=NORMAL)
+    area = models.IntegerField(null=True, blank=True)
 
     def __unicode__(self):
         return self.title

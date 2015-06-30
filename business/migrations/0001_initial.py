@@ -44,6 +44,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=750, null=True, blank=True)),
                 ('color', colorful.fields.RGBColorField()),
+                ('score_feet', models.IntegerField(null=True, blank=True)),
             ],
             options={
                 'verbose_name': 'Default Category Service',
@@ -84,6 +85,7 @@ class Migration(migrations.Migration):
                 ('event_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='schedule.Event')),
                 ('reference', models.CharField(max_length=750, null=True, blank=True)),
                 ('urgency_status', models.CharField(default=b'NO', max_length=2, choices=[(b'NO', b'Normal'), (b'HI', b'High'), (b'CT', b'Critical')])),
+                ('area', models.IntegerField(null=True, blank=True)),
                 ('custom_category_service', models.OneToOneField(related_name=b'service', null=True, blank=True, to='business.CustomCategoryService')),
                 ('default_category_service', models.ForeignKey(related_name=b'services', blank=True, to='business.DefaultCategoryService', null=True)),
                 ('employees', models.ManyToManyField(related_name=b'services', to='business.Employee')),

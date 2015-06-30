@@ -11,6 +11,9 @@
     <td class="{{size}} daynumber free">
 {% endif %}
     <div class="header">
+        <div class="holiday_name">
+            <span class="">{% if day|check_is_holiday %}{{day|get_holiday_name}}{% endif %}</span>
+        </div>
         <a href="{% url "day_calendar" calendar.slug %}{% querystring_for_date day.start 3 True %}">
             <b>{{day.start.day}}</b>
         </a>

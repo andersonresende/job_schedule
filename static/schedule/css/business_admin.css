@@ -1,0 +1,3 @@
+select[multiple], select[size] {
+    height: 300px !important;
+}

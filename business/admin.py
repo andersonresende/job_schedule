@@ -29,6 +29,11 @@ class ServiceForm(forms.ModelForm):
 
 
 class ServiceAdmin(admin.ModelAdmin):
+    class Media:
+        css = {
+            "all": ("schedule/css/business_admin.css",)
+        }
+
     model = Service
     form = ServiceForm
     exclude = [
@@ -42,7 +47,7 @@ class ServiceAdmin(admin.ModelAdmin):
         'reference',
         'urgency_status'
     ]
-
+    filter_horizontal = ['employees']
 
 class BasicAdminSite(AdminSite):
     site_header = 'Job Schedule'

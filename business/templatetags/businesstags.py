@@ -87,6 +87,19 @@ def check_is_sunday(day):
     return day.start.weekday() == 6
 
 @register.filter
+def get_holiday_name(day):
+    """
+    That functions receives one day and returns a holiday name.
+
+    :param day: Day object
+    :return: String
+    """
+    day_date = day.start.date()
+    holiday = Holiday.objects.get(date=day_date)
+
+    return holiday.name
+
+@register.filter
 def check_is_holiday(day):
     """
     That function get a day and check if is a holiday and not a work day.

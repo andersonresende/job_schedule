@@ -144,7 +144,13 @@ table.calendar td.sunday {
 }
 
 table.calendar td.holiday {
-	background-color: #66ff33
+	background-color: white;
+}
+
+table.calendar div.holiday_name {
+	color: red;
+	text-align: center;
+	font-size: 12px;
 }
 
 table.calendar td.small {
