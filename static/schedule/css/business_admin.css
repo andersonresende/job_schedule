@@ -1,3 +1,8 @@
 select[multiple], select[size] {
     height: 300px !important;
 }
+
+.calc-end-date-msg {
+    font-size: 14px;
+    padding-top: 6px;
+}

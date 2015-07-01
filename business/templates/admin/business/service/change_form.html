@@ -12,7 +12,7 @@
 
             var start_date = $("#id_start_0").val();
             var default_category_id = $("#id_default_category_service").val();
-            var employees_list_id = $("#id_employees_to").val();
+            var employees_list_id = $("#id_employees_to option").size();
             var area = $("#id_area").val();
 
             if (start_date && default_category_id && employees_list_id && area) {
@@ -27,11 +27,28 @@
                     area: area
                     },
                 success:function(result){
-                   alert("Sucess!");
+                   var end_date = (result['end_date']);
+                   $("#id_end_0").css("border-color","blue");
+                   $("#id_end_0").attr("value", end_date);
+
+
+                   $("#id_start_0").css("border-color", "");
+                   $("#id_default_category_service").css("border-color", "");
+                   $("#id_employees_to").css("border-color", "");
+                   $("#id_area").css("border-color", "");
+
+                   $(".calc-end-date-msg").css("color", "blue");
+                   $(".calc-end-date-msg").text("Calculation complete with sucess.");
+
                 }});
 
             }else{
-                alert("Preencha todos os campos necessários!");
+                $("#id_start_0").css("border-color", "red");
+                $("#id_default_category_service").css("border-color", "red");
+                $("#id_employees_to").css("border-color", "red");
+                $("#id_area").css("border-color", "red");
+                $(".calc-end-date-msg").css("color", "red");
+                $(".calc-end-date-msg").text("Check if all red color fields are filled.");
             }
         });
      });
@@ -81,7 +98,10 @@
 
 <form class="form-horizontal" {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.model_name }}_form" novalidate>{% csrf_token %}{% block form_top %}{% endblock %}
     <div class="alert alert-warning">{% blocktrans %}Fields in <strong>bold</strong> are required.{% endblocktrans %}</div>
-    <div class="alert alert-info"><button type="button" class="btn btn-default" id="calc_final_date">Calc Date</button></div>
+    <div class="col-md-12 alert alert-info">
+        <div class="col-md-2"><button type="button" class="btn btn-default" id="calc_final_date">Calculate End Date</button></div>
+        <div class="col-md-4 calc-end-date-msg">Click on button to calculate the end date with base on square feets.</div>
+    </div>
     {% if errors %}
     <div class="alert alert-danger">
         {% if errors|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
