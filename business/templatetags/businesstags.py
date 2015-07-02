@@ -1,5 +1,6 @@
 from django import template
 from business.models import Service, Holiday
+from business.utils import is_holiday, is_sunday
 
 register = template.Library()
 
@@ -78,13 +79,13 @@ def _get_urgency_status(dic):
 @register.filter
 def check_is_sunday(day):
     """
-    That function get a day and checks if is a sunday.
+    That function get a day and checks if is a sunday for template.
 
     :param day: class Day
     :return: Boolean
     """
 
-    return day.start.weekday() == 6
+    return is_sunday(day.start)
 
 @register.filter
 def get_holiday_name(day):
@@ -102,17 +103,13 @@ def get_holiday_name(day):
 @register.filter
 def check_is_holiday(day):
     """
-    That function get a day and check if is a holiday and not a work day.
+    That function get a day and check if is a holiday for template.
 
     :param day: class Day
     :return: Boolean
     """
 
-    holiday_lst = Holiday.objects.filter(work_day=False)
-    holiday_dates = (holiday.date for holiday in holiday_lst)
-    day_date = day.start.date()
-
-    return day_date in holiday_dates
+    return is_holiday(day.start)
 
 @register.filter
 def filter_occurrences_by_urgency(lst, day):

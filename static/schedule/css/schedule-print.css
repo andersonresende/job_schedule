@@ -159,6 +159,7 @@ table.calendar td.small {
 	text-align: center
 }
 
+
 td.daynumber {
     height:30px;
 }
@@ -187,11 +188,11 @@ td.daynumber div.eventcell {
     margin:0px 1px 3px 1px !important;
     overflow:auto;
     color: black;
-    font-size:12px;
+    font-size:8px;
     padding-top:7px;
     padding-left:5px;
     padding-right:5px;
-    height:15px;
+    height:10px;
 }
 
 td.daynumber div.starttime {

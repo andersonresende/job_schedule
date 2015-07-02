@@ -14,9 +14,9 @@
             var default_category_id = $("#id_default_category_service").val();
             var employees_list_id = $("#id_employees_to option").size();
             var area = $("#id_area").val();
+            var urgency_status = $("#id_urgency_status").val()
 
-            if (start_date && default_category_id && employees_list_id && area) {
-
+            if (start_date && default_category_id && employees_list_id && area && urgency_status) {
                 $.ajax({
                 type: "GET",
                 url: "/calc-final-date/",
@@ -24,18 +24,19 @@
                     start_date: start_date,
                     default_category_id: default_category_id,
                     employees_list_id: employees_list_id,
-                    area: area
+                    area: area,
+                    urgency_status: urgency_status
                     },
                 success:function(result){
                    var end_date = (result['end_date']);
                    $("#id_end_0").css("border-color","blue");
                    $("#id_end_0").attr("value", end_date);
 
-
                    $("#id_start_0").css("border-color", "");
                    $("#id_default_category_service").css("border-color", "");
                    $("#id_employees_to").css("border-color", "");
                    $("#id_area").css("border-color", "");
+                   $("#id_urgency_status").css("border-color", "");
 
                    $(".calc-end-date-msg").css("color", "blue");
                    $(".calc-end-date-msg").text("Calculation complete with sucess.");
@@ -47,6 +48,7 @@
                 $("#id_default_category_service").css("border-color", "red");
                 $("#id_employees_to").css("border-color", "red");
                 $("#id_area").css("border-color", "red");
+                $("#id_urgency_status").css("border-color", "red");
                 $(".calc-end-date-msg").css("color", "red");
                 $(".calc-end-date-msg").text("Check if all red color fields are filled.");
             }
