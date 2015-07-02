@@ -327,3 +327,7 @@ div.navigation a {
 div.tablewrapper {
     text-align:center;
 }
+
+div.ui-helper-hidden-accessible{
+    display: none;
+}
