@@ -331,3 +331,24 @@ div.tablewrapper {
 div.ui-helper-hidden-accessible{
     display: none;
 }
+
+div.add-service a {
+   display: none;
+}
+
+div.basic-admin a {
+    display: none;
+}
+
+div.this-month a {
+    display: none;
+}
+
+div.legend {
+    display: none;
+}
+
+td.daynumber div.daycell a {
+  text-decoration: none;
+  color: black;
+}

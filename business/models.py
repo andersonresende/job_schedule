@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 from colorful.fields import RGBColorField
 from schedule.models.events import Event
 
@@ -20,7 +21,7 @@ class Employee(models.Model):
     category_employee = models.ForeignKey(CategoryEmployee, related_name='employees')
 
     def __unicode__(self):
-        return self.name
+        return "{} - {}".format(self.name, self.category_employee)
 
     def get_medal(self):
         """
@@ -28,8 +29,21 @@ class Employee(models.Model):
 
         :return: ImageField
         """
-
         return self.category_employee.medal
+
+    def get_services_between_dates(self, start_date, end_date):
+        """
+        That function returns all services from employee between
+        start and end date.
+
+        :param start_date: Datetime
+        :param end_date: Datetime
+        :return: Service[]
+        """
+        services_lst = self.services.filter(
+            Q(start__range=(start_date, end_date)) | Q(end__range=(start_date, end_date)))
+
+        return services_lst
 
     class Meta:
         verbose_name = 'Employee'
@@ -91,6 +105,7 @@ class Service(Event):
     employees = models.ManyToManyField(Employee, related_name='services')
     urgency_status = models.CharField(max_length=2, choices=URGENCY_STATUS_CHOICES, default=NORMAL)
     area = models.IntegerField(null=True, blank=True)
+    closed = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.title
@@ -134,6 +149,7 @@ class Service(Event):
     class Meta:
         verbose_name = 'Service'
         verbose_name_plural = 'Services'
+        ordering = ('title',)
 
 
 class Holiday(models.Model):

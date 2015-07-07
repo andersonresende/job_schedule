@@ -44,9 +44,12 @@ class ServiceAdmin(admin.ModelAdmin):
     ]
     list_display = [
         'title',
+        'default_category_service',
         'reference',
-        'urgency_status'
+        'urgency_status',
+        'closed'
     ]
+    list_filter = ['closed']
     filter_horizontal = ['employees']
 
 class BasicAdminSite(AdminSite):

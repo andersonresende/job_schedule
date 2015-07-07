@@ -51,6 +51,11 @@ td.daynumber div.daycell .eventcell0 {
   margin-right:-1px;
 }
 
+td.daynumber div.daycell a {
+  text-decoration: none;
+  color: black;
+}
+
 td.daynumber div.daycell .eventcell1 {
 }
 
@@ -103,6 +108,7 @@ table.calendar {
 	border-spacing: 2px;
     border:1px solid #f0f0f0;
     background: #f0f0f0;
+    margin-top: 4px;
 }
 
 .dateheader {
@@ -191,6 +197,7 @@ td.daynumber div.eventcell {
     padding-top:7px;
     padding-left:5px;
     padding-right:5px;
+    padding-bottom: 5px;
     height:15px;
 }
 
@@ -325,4 +332,68 @@ div.navigation a {
 
 div.tablewrapper {
     text-align:center;
+}
+
+div.add-service a {
+    text-decoration: none;
+    color: white;
+    border-color: #5BC0D6;
+    background-color: #5BC0D6;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-weight:400;
+    font-size: 14px;
+    padding: 5px 5px 5px 5px;
+    position:absolute;
+    right:110px;
+    top:10px;
+}
+
+div.basic-admin a {
+    text-decoration: none;
+    color: white;
+    border-color: #337AB6;
+    background-color: #337AB6;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-weight:400;
+    font-size: 14px;
+    padding: 5px 5px 5px 5px;
+    position:absolute;
+    right:10px;
+    top:10px;
+}
+
+div.this-month a {
+    text-decoration: none;
+    color: white;
+    border-color: #d9534f;
+    background-color: #d9534f;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-weight:400;
+    font-size: 14px;
+    padding: 5px 5px 5px 5px;
+    position:absolute;
+    right:204px;
+    top:10px;
+}
+
+div.basic-admin a:hover {
+    background-color: #1F496D;
+}
+
+div.this-month a:hover {
+    background-color: #983A37;
+}
+
+div.add-service a:hover {
+    background-color: #377380;
+}
+
+div.legend {
+    width: 300px;
+    border: 1px solid #f0f0f0;
+    margin-top: 10px;
+    padding: 10px;
 }

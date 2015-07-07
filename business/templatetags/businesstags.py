@@ -1,8 +1,22 @@
 from django import template
-from business.models import Service, Holiday
+from django.core import urlresolvers
+from business.models import Service, Holiday, DefaultCategoryService
 from business.utils import is_holiday, is_sunday
 
 register = template.Library()
+
+@register.inclusion_tag("schedule/legend.html", takes_context=True)
+def render_legend(context):
+    """
+    That function returns de legend html to default category
+    service.
+
+    :param dic: Dict
+    :return: Context
+    """
+    category_service_lst = DefaultCategoryService.objects.all()
+    context.update({'category_service_lst': category_service_lst})
+    return context
 
 @register.inclusion_tag("schedule/tooltip_info.html", takes_context=True)
 def render_tooltip_info(context, dic):
@@ -16,7 +30,6 @@ def render_tooltip_info(context, dic):
     service = get_service(dic)
     info_dic = service.get_tooltip_info()
     context.update(info_dic)
-
     return context
 
 def get_service(dic):
@@ -47,6 +60,21 @@ def get_reference(dic):
     reference = service.reference
 
     return reference
+
+@register.filter
+def get_id(dic):
+    """
+    That function get a dict with occurrence obj and return
+    the id of occurrence service.
+
+    :param dic: Dict
+    :return: Int
+    """
+
+    service = get_service(dic)
+    id = service.id
+
+    return id
 
 @register.filter
 def get_color_service(dic):

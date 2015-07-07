@@ -36,7 +36,7 @@
 
                                 </div>
                             {% endcomment %}
-                            <span>{{ o|get_reference }}</span>
+                            <span><a href="/basic-admin/business/service/{{ o|get_id }}/">{{ o|get_reference }}</span>
                         </div>
                         <div id="{% hash_occurrence o.occurrence %}" style="display:none;">
                           {% include 'schedule/_detail.html' with o=o %}

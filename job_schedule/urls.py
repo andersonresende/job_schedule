@@ -3,7 +3,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.conf import settings
 from business.admin import admin_site
-from business.views import CalcFinalDateView
+from business.views import CalcFinalDateView, CheckEmployeesServicesView
 
 urlpatterns = patterns('',
     # Examples:
@@ -14,6 +14,8 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^schedule/', include('schedule.urls')),
     url(r'^calc-final-date/$', CalcFinalDateView.as_view(), name='calc-final-date'),
+    url(r'^check-employees-services/$', CheckEmployeesServicesView.as_view(), name='check-employees-services'),
+
 )
 
 # Serving static files in development

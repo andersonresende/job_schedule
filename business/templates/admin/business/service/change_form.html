@@ -8,6 +8,55 @@
 
      $(document).ready(function(){
 
+        $("#check_employees_services").click(function(e){
+
+            var start_date = $("#id_start_0").val();
+            var end_date = $("#id_end_0").val();
+            var employees_list_id = []
+            $("#id_employees_to option").each(function(){
+                employees_list_id.push($(this).val());
+            });
+
+            if (start_date && end_date && employees_list_id.length > 0 ) {
+                $.ajax({
+                type: "GET",
+                url: "/check-employees-services/",
+                data: {
+                    start_date: start_date,
+                    end_date: end_date,
+                    employees_list_id: employees_list_id,
+                    },
+                success:function(result){
+                   var msg = "That employees have another service: ";
+                   var employees = (result.employees);
+
+                   for (i in employees){
+                        msg = msg + employees[i].name;
+
+                        if (i != employees.length - 1){
+                            msg += ", ";
+                        }else{
+                            msg += ".";
+                        }
+                    }
+
+                   $(".check-employees-services-msg").text(msg);
+                   $("#id_start_0").css("border-color", "");
+                   $("#id_end_0").css("border-color", "");
+                   $("#id_employees_to").css("border-color", "");
+
+
+                }});
+
+            }else {
+                 $("#id_start_0").css("border-color", "red");
+                 $("#id_end_0").css("border-color", "red");
+                 $("#id_employees_to").css("border-color", "red");
+                 $(".check-employees-services-msg").text("Check if all red color fields are filled.");
+            }
+
+        });
+
         $("#calc_final_date").click(function(e){
 
             var start_date = $("#id_start_0").val();
@@ -103,6 +152,10 @@
     <div class="col-md-12 alert alert-info">
         <div class="col-md-2"><button type="button" class="btn btn-default" id="calc_final_date">Calculate End Date</button></div>
         <div class="col-md-4 calc-end-date-msg">Click on button to calculate the end date with base on square feets.</div>
+    </div>
+    <div class="col-md-12 alert alert-info">
+        <div class="col-md-2"><button type="button" class="btn btn-default" id="check_employees_services">Check Employees</button></div>
+        <div class="col-md-4 check-employees-services-msg">Click on button to check is employees already have other services.</div>
     </div>
     {% if errors %}
     <div class="alert alert-danger">

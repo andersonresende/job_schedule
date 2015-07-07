@@ -1,7 +1,7 @@
 import datetime
 from django.http import JsonResponse
 from django.views.generic import View
-from .models import DefaultCategoryService
+from .models import DefaultCategoryService, Employee
 from .utils import is_holiday, is_sunday
 
 
@@ -75,6 +75,31 @@ class CalcFinalDateView(View):
         end_date = self.increment_date(start_datetime, quant_days, urgency_status)
 
         return JsonResponse({'end_date': end_date})
+
+
+class CheckEmployeesServicesView(View):
+
+    def get(self, request, *args, **kwargs):
+        start_date = request.GET.get('start_date')
+        end_date = request.GET.get('end_date')
+        employees_lst_id = request.GET.getlist('employees_list_id[]')
+
+        start_datetime = datetime.datetime.strptime(start_date, "%Y-%m-%d")
+        end_datetime = datetime.datetime.strptime(end_date, "%Y-%m-%d")
+        employees_lst = Employee.objects.filter(id__in=employees_lst_id)
+
+        employees_dic = {'employees': []}
+
+        for employee in employees_lst:
+            services_query = employee.get_services_between_dates(start_datetime, end_datetime)
+            if services_query.exists():
+                employees_dic['employees'].append(
+                    {'name': employee.name,
+                     'services': [service.title for service in services_query]
+                     }
+                )
+
+        return JsonResponse(employees_dic)
 
 
 

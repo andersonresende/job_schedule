@@ -1,0 +1,10 @@
+<div class="legend">
+    {% for category_service in category_service_lst %}
+        <div style="margin-bottom:5px;">
+            <div class="legend-category" style="float:left;">{{category_service}}</div>
+            <div class="legend-color" style="float:right;width:30px;height:15px;border:1px
+            solid black;background-color:{{category_service.color}}">
+            </div>
+        </div><br/>
+    {% endfor %}
+</div>
