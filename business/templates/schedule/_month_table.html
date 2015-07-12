@@ -9,9 +9,12 @@
 {% for week in month.get_weeks %}
     <tr>
     <td>
-        <a href="{% url "week_calendar" calendar.slug %}{% querystring_for_date week.start 3 True %}">
-            {{week.start|date:"W"}}
-        </a>
+        {{week.start|date:"W"}}
+        {% comment %}
+            <a href="{% url "week_calendar" calendar.slug %}{% querystring_for_date week.start 3 True %}">
+                {{week.start|date:"W"}}
+            </a>
+        {% endcomment %}
     </td>
     {% for day in week.get_days %}
 	{% day_cell calendar day month size %}

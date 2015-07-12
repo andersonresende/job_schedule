@@ -14,9 +14,12 @@
         <div class="holiday_name">
             <span class="">{% if day|check_is_holiday %}{{day|get_holiday_name}}{% endif %}</span>
         </div>
-        <a href="{% url "day_calendar" calendar.slug %}{% querystring_for_date day.start 3 True %}">
-            <b>{{day.start.day}}</b>
-        </a>
+        <b>{{day.start.day}}</b>
+        {% comment %}
+            <a href="{% url "day_calendar" calendar.slug %}{% querystring_for_date day.start 3 True %}">
+                <b>{{day.start.day}}</b>
+            </a>
+        {% endcomment %}
     </div>
     {% ifnotequal size "small" %}
         <div class="daycell">
@@ -28,12 +31,10 @@
                              title="{% render_tooltip_info o %}" id="tooltip">
                              {% comment %}
                                 <div class="starttime">
-
                                         {% ifequal o.class 0 %}{{ o.occurrence.start|time:"G:i" }}{% endifequal %}
                                         {% ifequal o.class 1 %}{{ o.occurrence.start|time:"G:i" }}{% endifequal %}
                                         {% ifequal o.class 2 %}(All day){% endifequal %}
                                         {% ifequal o.class 3 %}Ends at {{ o.occurrence.end|time:"G:i" }}{% endifequal %}
-
                                 </div>
                             {% endcomment %}
                             <span><a href="/basic-admin/business/service/{{ o|get_id }}/">{{ o|get_reference }}</span>
