@@ -5,8 +5,7 @@ from django.contrib.admin.templatetags.admin_urls import add_preserved_filters
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
-
+from django.shortcuts import redirect
 
 from .models import (
     Service,
@@ -56,27 +55,21 @@ class ServiceAdmin(admin.ModelAdmin):
     list_filter = ['closed']
     filter_horizontal = ['employees']
 
-    @staticmethod
-    def _response_to_calendar():
-        """
-        Redirect to calendar schedule url.
-        """
-        post_url = reverse("month_calendar", kwargs={'calendar_slug': 'default'})
-        return HttpResponseRedirect(post_url)
-
     def response_post_save_change(self, request, obj):
         """
         Figure out where to redirect after the 'Save' button has been pressed
         when editing an existing object.
         """
-        self._response_to_calendar()
+        post_url = reverse("month_calendar", kwargs={'calendar_slug': 'default'})
+        return redirect(post_url)
 
     def response_post_save_add(self, request, obj):
         """
         Figure out where to redirect after the 'Save' button has been pressed
         when adding a new object.
         """
-        self._response_to_calendar()
+        post_url = reverse("month_calendar", kwargs={'calendar_slug': 'default'})
+        return redirect(post_url)
 
 
 class BasicAdminSite(AdminSite):
