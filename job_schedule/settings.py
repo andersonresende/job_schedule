@@ -62,10 +62,10 @@ WSGI_APPLICATION = 'job_schedule.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'job_schedule',
-        'USER': 'job_schedule_user',
-        'PASSWORD': 'job_schedule_user1',
-        'HOST': '127.0.0.1',
+        'NAME': 'job',
+        'USER': 'jobuser',
+        'PASSWORD': 'jobuser1',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
