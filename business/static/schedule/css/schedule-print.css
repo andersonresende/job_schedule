@@ -303,6 +303,7 @@ body, td {font-family:sans-serif;}
 #messages {
   position:absolute;
   top:50px;
+  display: none;
 }
 
 div.calendarname {

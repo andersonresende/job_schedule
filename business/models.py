@@ -26,7 +26,6 @@ class Employee(models.Model):
     def get_medal(self):
         """
         That function returns a medal from category employee.
-
         :return: ImageField
         """
         return self.category_employee.medal
@@ -42,7 +41,6 @@ class Employee(models.Model):
         """
         services_lst = self.services.filter(
             Q(start__range=(start_date, end_date)) | Q(end__range=(start_date, end_date)))
-
         return services_lst
 
     class Meta:
@@ -105,7 +103,7 @@ class Service(Event):
     employees = models.ManyToManyField(Employee, related_name='services')
     urgency_status = models.CharField(max_length=2, choices=URGENCY_STATUS_CHOICES, default=NORMAL)
     area = models.IntegerField(null=True, blank=True)
-    closed = models.BooleanField(default=False)
+    closed = models.BooleanField(default=False, verbose_name=u'Finished')
 
     def __unicode__(self):
         return self.title
@@ -116,7 +114,6 @@ class Service(Event):
 
         :return: obj subclass of CategoryService
         """
-
         return self.default_category_service or self.custom_category_service
 
     def get_color(self):
@@ -125,7 +122,6 @@ class Service(Event):
 
         :return: String
         """
-
         category_service = self.get_category_service()
         return category_service.get_color()
 
@@ -135,7 +131,6 @@ class Service(Event):
 
         :return: Dict
         """
-
         dic = {
             'title': self.title,
             'category_service': self.get_category_service(),
@@ -143,7 +138,6 @@ class Service(Event):
             'end_date': str(self.end.date()),
             'employees': self.employees.all(),
         }
-
         return dic
 
     class Meta:

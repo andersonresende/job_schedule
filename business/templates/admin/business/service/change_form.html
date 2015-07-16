@@ -27,20 +27,15 @@
                     employees_list_id: employees_list_id,
                     },
                 success:function(result){
-                   var msg = "That employees have another service: ";
+                   var msg = "That employees have another services: <br/>";
                    var employees = (result.employees);
 
                    for (i in employees){
-                        msg = msg + employees[i].name;
-
-                        if (i != employees.length - 1){
-                            msg += ", ";
-                        }else{
-                            msg += ".";
-                        }
+                        msg += employees[i].name;
+                        msg += ": " + employees[i].services + "<br/> ";
                     }
 
-                   $(".check-employees-services-msg").text(msg);
+                   $(".check-employees-services-msg").html(msg);
                    $("#id_start_0").css("border-color", "");
                    $("#id_end_0").css("border-color", "");
                    $("#id_employees_to").css("border-color", "");
@@ -134,7 +129,9 @@
         {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
         <a role="button" href="{% add_preserved_filters history_url %}" class="historylink">{% trans "History" %}</a>
     </li>
-    {% if has_absolute_url %}<li><a href="{% url 'admin:view_on_site' content_type_id original.pk %}" class="viewsitelink">{% trans "View on site" %}</a></li>{% endif %}
+    {% comment %}{% if has_absolute_url %}<li>
+      <a href="{% url 'admin:view_on_site' content_type_id original.pk %}" class="viewsitelink">
+          {% trans "View on site" %}</a></li>{% endif %} {% endcomment %}
     {% endblock %}
   </ul>
 </div>
@@ -151,11 +148,11 @@
     <div class="alert alert-warning">{% blocktrans %}Fields in <strong>bold</strong> are required.{% endblocktrans %}</div>
     <div class="col-md-12 alert alert-info">
         <div class="col-md-2"><button type="button" class="btn btn-default" id="calc_final_date">Calculate End Date</button></div>
-        <div class="col-md-4 calc-end-date-msg">Click on button to calculate the end date with base on square feets.</div>
+        <div class="col-md-4 calc-end-date-msg">Click on button to calculate the end date based on area.</div>
     </div>
     <div class="col-md-12 alert alert-info">
         <div class="col-md-2"><button type="button" class="btn btn-default" id="check_employees_services">Check Employees</button></div>
-        <div class="col-md-4 check-employees-services-msg">Click on button to check is employees already have other services.</div>
+        <div class="col-md-4 check-employees-services-msg">Click on button to check is are scheduled to another service.</div>
     </div>
     {% if errors %}
     <div class="alert alert-danger">
@@ -214,7 +211,7 @@
     </div>
 
     <div class="form-actions">
-        {% block submit_buttons_bottom %}{% submit_row %}{% endblock %}
+        {% block submit_buttons_bottom %}{% submit_row %}{% endblock %} <button>Salvar e ir ao Calendario</button>
     </div>
 </form>
 {% endblock %}

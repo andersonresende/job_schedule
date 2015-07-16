@@ -2,7 +2,7 @@ run:
 	python manage.py runserver
 
 ubuntu:
-	ssh -i ~/Downloads/tangerinalab.pem ubuntu@ec2-54-232-20-254.sa-east-1.compute.amazonaws.com
+	ssh -i ~/Downloads/danillo.pem ubuntu@54.232.226.159
 
 migrate:
 	python manage.py makemigrations business
